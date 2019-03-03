@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="weatherfx.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weatherfx.FXMLDocumentController">
     <children>
       <BorderPane layoutY="126.0" prefHeight="74.0" prefWidth="320.0">
          <center>
@@ -15,7 +15,7 @@
       </BorderPane>
       <Label layoutX="32.0" layoutY="49.0" text="Zip Code:" />
       <Label layoutX="32.0" layoutY="83.0" text="City, State" />
-      <TextField id="zipCodeText" layoutX="103.0" layoutY="45.0" />
-      <TextField id="cityStateText" layoutX="103.0" layoutY="79.0" />
+      <TextField id="zipCodeField" fx:id="zipCodeField" layoutX="103.0" layoutY="45.0" />
+      <TextField id="cityStateField" fx:id="cityStateField" layoutX="103.0" layoutY="79.0" />
     </children>
 </AnchorPane>
