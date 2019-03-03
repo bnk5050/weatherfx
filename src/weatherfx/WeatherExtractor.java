@@ -27,10 +27,20 @@ package weatherfx;
  *
  * @author Brian
  */
+
+import org.apache.http.*;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 public class WeatherExtractor {
+    
+    DefaultHttpClient httpclient = new DefaultHttpClient();
+    
 
     static void getWeather(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        
     }
     
 }
