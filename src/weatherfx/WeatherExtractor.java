@@ -30,11 +30,13 @@ package weatherfx;
 
 import org.apache.http.*;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 public class WeatherExtractor {
     
-    DefaultHttpClient httpclient = new DefaultHttpClient();
+    CloseableHttpClient httpclient = HttpClients.createDefault();
+    HttpGet httpget = new HttpGet("https://jsonplaceholder.typicode.com/todos/1")
     
 
     static void getWeather(String text) {
