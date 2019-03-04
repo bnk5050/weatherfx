@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2019 Brian Kirby.
+ * Copyright 2019 Brian.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,33 +23,41 @@
  */
 package weatherfx;
 
+import java.io.IOException;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+
 /**
  *
  * @author Brian
  */
+public class HttpHandler {
 
-import java.io.IOException;
+    
+    //TODO replace the site I'm querying with the weather API
 
-public class WeatherExtractor {
-    
-    HttpHandler requesterHandler;
-    
-    public WeatherExtractor(String textString) {
+    public HttpHandler() {
         
-        HttpHandler requesterHandler = new HttpHandler();
-        this.getWeather(textString);
     }
-    
-   public void getWeather(String textString){
-       
-       try {
-           requesterHandler.makeApiRequest();
-       } catch (IOException e) {
-           System.out.println("There was an excpetion");
-       }
-       
-   }
-    
+   
+    public void makeApiRequest() throws IOException{
+        
+    CloseableHttpClient httpclient = HttpClients.createDefault();
+    HttpGet httpGet = new HttpGet("https://jsonplaceholder.typicode.com/todos/1");
+    CloseableHttpResponse response1 = httpclient.execute(httpGet);
+    try{
+        System.out.println("The information received from the API is: ");
+        System.out.println(response1.getStatusLine());
+        HttpEntity entity1 = response1.getEntity();
+        EntityUtils.consume(entity1);
+    } finally {
+        response1.close();
+    }
 
-
+        
+    }
 }

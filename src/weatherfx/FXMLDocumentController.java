@@ -42,19 +42,21 @@ public class FXMLDocumentController implements Initializable {
     private TextField zipCodeField;
     @FXML
     private TextField cityStateField;
-    
+     
     @FXML
     private void handleButtonAction(ActionEvent event) {
         
         //Use the Zipcode first
         if (!zipCodeField.getText().isEmpty()) {
             //TODO validate input for zip code and city state
-            WeatherExtractor.getWeather(zipCodeField.getText());
+            WeatherExtractor (zipCodeField.getText());
         }
         else if (!cityStateField.getText().isEmpty()) {
             //TODO Validate the City and State
-            WeatherExtractor.getWeather(cityStateField.getText());
+            WeatherExtractor(cityStateField.getText());
         }
+        
+        
         else{
             Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
         }
