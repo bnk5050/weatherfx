@@ -23,6 +23,7 @@
  */
 package weatherfx;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -46,19 +47,22 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         
-        //Use the Zipcode first
-        if (!zipCodeField.getText().isEmpty()) {
-            //TODO validate input for zip code and city state
-            WeatherExtractor (zipCodeField.getText());
-        }
-        else if (!cityStateField.getText().isEmpty()) {
-            //TODO Validate the City and State
-            WeatherExtractor(cityStateField.getText());
-        }
-        
-        
-        else{
+        try {
+            //Use the Zipcode first
+            if (!zipCodeField.getText().isEmpty()) {
+                //TODO validate input for zip code and city state
+                WeatherExtractor.makeApiRequest(zipCodeField.getText());
+            }
+            else if (!cityStateField.getText().isEmpty()) {
+                //TODO Validate the City and State
+                WeatherExtractor.makeApiRequest(cityStateField.getText());
+            }
+            else{
             Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
+        }
+   
+        } catch (IOException e) {
+            System.out.println("Error during API call");
         }
 
     }
