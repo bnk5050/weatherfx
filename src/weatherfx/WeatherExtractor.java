@@ -39,36 +39,29 @@ import org.apache.http.util.EntityUtils;
  */
 public class WeatherExtractor {
 
+    private final String API_KEY = "0b398274ec45a0d76da946f036f74b38";
     
-    //TODO replace the site I'm querying with the weather API
-
     public WeatherExtractor() {
         
     }
    
     public static void makeApiRequest(String locationString) throws IOException{
         
-    CloseableHttpClient httpclient = HttpClients.createDefault();
-    HttpGet httpGet = new HttpGet("https://jsonplaceholder.typicode.com/todos/1");
-    
-    try(CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
-        System.out.println("The information received from the API is: ");
-        System.out.println(response1.getStatusLine().getStatusCode());
-        InputStream messageBody = response1.getEntity().getContent();
-        //EntityUtils.consume(entity1);
-        //Convert result to string
-        ByteArrayOutputStream result = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = messageBody.read(buffer)) != -1){
-            result.write(buffer,0,length);
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/forecast?zip=29483,us&appid=0b398274ec45a0d76da946f036f74b38");
+
+        try(CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
+            System.out.println("The information received from the API is: ");
+            System.out.println(response1.getStatusLine().getStatusCode());
+            HttpEntity responseEntity = response1.getEntity();
+            System.out.println(EntityUtils.toString(responseEntity, "UTF-8"));
+
+            InputStream messageBody = responseEntity.getContent();
+            EntityUtils.consume(responseEntity);
+
+
+
         }
-        System.out.println(result.toString("UTF-8"));
-    }
-    
-
-                
-
-        
     }
 }
+
