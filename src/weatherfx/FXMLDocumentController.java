@@ -30,7 +30,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -51,11 +50,11 @@ public class FXMLDocumentController implements Initializable {
             //Use the Zipcode first
             if (!zipCodeField.getText().isEmpty()) {
                 //TODO validate input for zip code and city state
-                WeatherExtractor.makeApiRequest(zipCodeField.getText());
+                weatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else if (!cityStateField.getText().isEmpty()) {
                 //TODO Validate the City and State
-                WeatherExtractor.makeApiRequest(cityStateField.getText());
+                weatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else{
             Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
@@ -63,6 +62,8 @@ public class FXMLDocumentController implements Initializable {
    
         } catch (IOException e) {
             System.out.println("Error during API call");
+            System.out.println("The cause is" + e.getCause());
+            System.out.println("The message is" + e.getMessage());
         }
 
     }

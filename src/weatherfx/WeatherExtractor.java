@@ -23,16 +23,15 @@
  */
 package weatherfx;
 
-import java.io.ByteArrayOutputStream;
+import com.fasterxml.jackson.databind.JsonNode;
 import java.io.IOException;
-import java.io.InputStream;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  *
  * @author Brian
@@ -45,23 +44,32 @@ public class WeatherExtractor {
         
     }
    
-    public static void makeApiRequest(String locationString) throws IOException{
+    public static weatherObject makeApiRequest(String locationString) throws IOException{
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/forecast?zip=29483,us&appid=0b398274ec45a0d76da946f036f74b38");
+        HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/weather?zip=94040,us&appid=0b398274ec45a0d76da946f036f74b38");
 
         try(CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
             System.out.println("The information received from the API is: ");
             System.out.println(response1.getStatusLine().getStatusCode());
             HttpEntity responseEntity = response1.getEntity();
-            System.out.println(EntityUtils.toString(responseEntity, "UTF-8"));
+            //System.out.println(EntityUtils.toString(responseEntity, "UTF-8"));
 
-            InputStream messageBody = responseEntity.getContent();
+            //InputStream messageBody = responseEntity.getContent();
+           
+            
+            //Use Jackson to Parse the XML file for the information
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode rootNode = objectMapper.readTree(responseEntity.getContent());
             EntityUtils.consume(responseEntity);
-
-
-
+            weatherObject currentWeather = new weatherObject();
+            currentWeather.setCity(rootNode.get("name").asText());
+            currentWeather.setTemp(rootNode.path("main").get("temp").asDouble());
+            
+            System.out.println(currentWeather.toString());
+            return currentWeather;
         }
+
     }
 }
 
