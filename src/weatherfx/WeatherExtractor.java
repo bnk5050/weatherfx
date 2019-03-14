@@ -66,6 +66,7 @@ public class WeatherExtractor {
             currentWeather.setCity(rootNode.get("name").asText());
             currentWeather.setTemp(rootNode.path("main").get("temp").asDouble());
             
+            //TODO Grab weather conditions as well from the JSON response
             System.out.println(currentWeather.toString());
             return currentWeather;
         }
