@@ -23,39 +23,22 @@
  */
 package weatherfx;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
+
 /**
  *
  * @author Brian
  */
-public class weatherObject {
-    
-    private String city;
-    private double temp;
-    
+public class FXMLShowWeatherController implements Initializable{
+
+    private WeatherObject weatherObject;
     
     @Override
-    public String toString() {
-        return "weatherObject{" + "city=" + city + ", temp=" + temp + '}';
+    public void initialize(URL location, ResourceBundle resources) {
+        
     }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public double getTemp() {
-        return temp;
-    }
-
-    public void setTemp(double temp) {
-        this.temp = temp;
-    }
-
-    public weatherObject() {
-    }
-    
+   
     
 }

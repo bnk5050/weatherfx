@@ -28,8 +28,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -44,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
     private TextField zipCodeField;
     @FXML
     private TextField cityStateField;
-
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
         //TODO look at spinning new threads to wait for them to finish before continuing with the GUI
@@ -53,17 +56,25 @@ public class FXMLDocumentController implements Initializable {
             //Use the Zipcode first
             if (!zipCodeField.getText().isEmpty()) {
                 //TODO validate input for zip code and city state
-                weatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
+                WeatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else if (!cityStateField.getText().isEmpty()) {
                 //TODO Validate the City and State
-                weatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
+                WeatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else{
-            Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
+                Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
+            }
+            //Create a the new scene and display it
             
-        }
-        } catch (IOException e) {
+            Parent weatherViewParent = FXMLLoader.load(getClass().getResource("FXMLShowWeather.fxml"));
+            Scene weatherViewScene = new Scene(weatherViewParent);
+            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            
+            currentStage.setScene(weatherViewScene);
+            currentStage.show();
+            
+        }   catch (IOException e) {
             System.out.println("Error during API call");
             System.out.println("The cause is" + e.getCause());
             System.out.println("The message is" + e.getMessage());
@@ -76,5 +87,5 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+
 }
