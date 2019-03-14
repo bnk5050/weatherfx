@@ -29,8 +29,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  *
@@ -42,9 +44,10 @@ public class FXMLDocumentController implements Initializable {
     private TextField zipCodeField;
     @FXML
     private TextField cityStateField;
-     
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        //TODO look at spinning new threads to wait for them to finish before continuing with the GUI
         
         try {
             //Use the Zipcode first
@@ -58,14 +61,15 @@ public class FXMLDocumentController implements Initializable {
             }
             else{
             Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
+            
         }
-   
         } catch (IOException e) {
             System.out.println("Error during API call");
             System.out.println("The cause is" + e.getCause());
             System.out.println("The message is" + e.getMessage());
         }
-
+        
+        
     }
     
     @Override

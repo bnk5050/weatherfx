@@ -47,7 +47,7 @@ public class WeatherExtractor {
     public static weatherObject makeApiRequest(String locationString) throws IOException{
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/weather?zip=94040,us&appid=0b398274ec45a0d76da946f036f74b38");
+        HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/weather?zip=94040,us&units=imperial&appid=0b398274ec45a0d76da946f036f74b38");
 
         try(CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
             System.out.println("The information received from the API is: ");
