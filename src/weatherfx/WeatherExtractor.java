@@ -44,7 +44,7 @@ public class WeatherExtractor {
         
     }
    
-    public static WeatherObject makeApiRequest(String locationString) throws IOException{
+    public static void makeApiRequest(String locationString) throws IOException{
         
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet("https://api.openweathermap.org/data/2.5/weather?zip=94040,us&units=imperial&appid=0b398274ec45a0d76da946f036f74b38");
@@ -64,13 +64,14 @@ public class WeatherExtractor {
             EntityUtils.consume(responseEntity);
             WeatherObject currentWeather = new WeatherObject();
             currentWeather.setCity(rootNode.get("name").asText());
-            currentWeather.setTemp(rootNode.path("main").get("temp").asDouble());
+            currentWeather.setTemperature(rootNode.path("main").get("temp").asDouble());
             
             //TODO Grab weather conditions as well from the JSON response
             System.out.println(currentWeather.toString());
-            return currentWeather;
         }
 
     }
 }
+
+
 

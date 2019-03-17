@@ -25,7 +25,9 @@ package weatherfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  *
@@ -33,12 +35,30 @@ import javafx.fxml.Initializable;
  */
 public class FXMLShowWeatherController implements Initializable{
 
-    private WeatherObject weatherObject;
+
+
+    private WeatherModel model;
+    
+    @FXML
+    private Label cityLabel;
+    
+    public void setWeatherObject(WeatherObject weatherObject) {
+        
+    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+        cityLabel.setText(weatherObject.getCity());
     }
    
+    
+    public WeatherModel getModel() {
+        return model;
+    }
+
+    public void setModel(WeatherModel model) {
+        this.model = model;
+    }
     
 }

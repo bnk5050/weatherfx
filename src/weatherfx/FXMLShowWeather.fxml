@@ -4,13 +4,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="weatherfx.FXMLShowWeatherController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weatherfx.FXMLShowWeatherController">
    <children>
       <BorderPane layoutX="200.0" layoutY="92.0" prefHeight="200.0" prefWidth="200.0">
          <top>
             <Label text="Test was successful" BorderPane.alignment="CENTER" />
          </top>
+         <center>
+            <Label fx:id="cityLabel" text="Label" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>

@@ -48,40 +48,82 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField cityStateField;
     
+    private WeatherModel model;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        
         //TODO look at spinning new threads to wait for them to finish before continuing with the GUI
+        WeatherObject currentWeather = null;
+        
         
         try {
+            
             //Use the Zipcode first
             if (!zipCodeField.getText().isEmpty()) {
                 //TODO validate input for zip code and city state
-                WeatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
+                WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else if (!cityStateField.getText().isEmpty()) {
                 //TODO Validate the City and State
-                WeatherObject currentWeather = WeatherExtractor.makeApiRequest(zipCodeField.getText());
+                WeatherExtractor.makeApiRequest(zipCodeField.getText());
             }
             else{
                 Alert alertbox = new Alert(Alert.AlertType.WARNING, "You must enter a Zip Code or City and State");
+                alertbox.showAndWait();
             }
-            //Create a the new scene and display it
             
-            Parent weatherViewParent = FXMLLoader.load(getClass().getResource("FXMLShowWeather.fxml"));
-            Scene weatherViewScene = new Scene(weatherViewParent);
-            Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            
-            currentStage.setScene(weatherViewScene);
-            currentStage.show();
-            
-        }   catch (IOException e) {
+            }   catch (IOException e) {
             System.out.println("Error during API call");
             System.out.println("The cause is" + e.getCause());
             System.out.println("The message is" + e.getMessage());
         }
+            /**
+             * I commented this out because I wanted to use the loader object
+             * instead of using the static load() method of the FXMLLoader class
+             */
+            //Parent weatherViewParent = FXMLLoader.load(getClass().getResource("FXMLShowWeather.fxml"));
+            
+            /**
+             * Creates a loader object containing the new scene and controller
+             * Loads the XML hierarchy into the parent/root node
+             * Creates a new scene for the weatherViewParent root node
+             */
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLShowWeather.fxml"));
+                Parent weatherViewParent = loader.load();
+                Scene weatherViewScene = new Scene(weatherViewParent);
+
+
+                //Get a copy of the controller and pass in the model object
+                
+                FXMLShowWeatherController controller = loader.<FXMLShowWeatherController>getController();
+                
+                
+                //controller.setWeatherObject(currentWeather);
+
+                /**
+                 * Gets the current window where the event occurred
+                 * Casts the return object to a Node, then casts that to a Stage
+                 * Use that stage to set the scene to my new view/window
+                 */
+
+                Stage currentStage = (Stage) ((Node)event.getSource()).getScene().getWindow();      
+                currentStage.setScene(weatherViewScene);
+                currentStage.show();
+            } catch (IOException e) {
+                System.out.println("Error Controller Load");
+                System.out.println("The cause is" + e.getCause());
+                System.out.println("The message is" + e.getMessage());
+            }
+ 
+            
+
         
         
     }
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

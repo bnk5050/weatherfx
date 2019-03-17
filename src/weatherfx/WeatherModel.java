@@ -21,61 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-
 package weatherfx;
-
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 /**
  *
- * @author Brian Kirby
+ * @author Brian
  */
-public class WeatherObject {
-
-    private final StringProperty city = new SimpleStringProperty("Waiting");
-    private final DoubleProperty temperature = new SimpleDoubleProperty(0);
-    
-    
-    public String getCity() {
-        return city.get();
-    }
-
-    public void setCity(String value) {
-        city.set(value);
-    }
-
-    public StringProperty cityProperty() {
-        return city;
-    }
-    
-
-    public double getTemperature() {
-        return temperature.get();
-    }
-
-    public void setTemperature(double value) {
-        temperature.set(value);
-    }
-
-    public DoubleProperty temperatureProperty() {
-        return temperature;
-    }
-    
-
-    
-    
-    @Override
-    public String toString() {
-        return "weatherObject{" + "city=" + this.getCity() + ", temp=" + this.getTemperature()+ '}';
-    }
-
-
-    public WeatherObject() {
-    }
-    
+public class WeatherModel {
     
 }
