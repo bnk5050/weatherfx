@@ -66,7 +66,9 @@ public class FXMLShowWeatherController implements Initializable{
     public void setModel(WeatherModel model) {
         this.model = model;
         cityLabel.textProperty().bind(model.getWeather().cityProperty());
-        temperatureLabel.textProperty().bind(Bindings.convert(model.getWeather().temperatureProperty()));
+        temperatureLabel.textProperty()
+                .bind(Bindings.format("Current Temp: %.0f %s",
+                        model.getWeather().temperatureProperty(), "\u00b0"));
     }
     
 }
