@@ -36,8 +36,14 @@ import javafx.beans.property.StringProperty;
  */
 public class WeatherObject {
 
-    private final StringProperty city = new SimpleStringProperty("Waiting");
-    private final DoubleProperty temperature = new SimpleDoubleProperty(0);
+    private final StringProperty city;
+    private final DoubleProperty temperature;
+    
+    public WeatherObject() {
+        city  = new SimpleStringProperty("no results");
+        temperature = new SimpleDoubleProperty(0);
+                
+    }
     
     
     public String getCity() {
@@ -74,8 +80,6 @@ public class WeatherObject {
     }
 
 
-    public WeatherObject() {
-    }
     
     
 }

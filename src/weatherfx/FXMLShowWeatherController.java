@@ -25,6 +25,11 @@ package weatherfx;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -35,21 +40,22 @@ import javafx.scene.control.Label;
  */
 public class FXMLShowWeatherController implements Initializable{
 
-
-
+ 
     private WeatherModel model;
     
     @FXML
-    private Label cityLabel;
+    private Label cityLabel = new Label("null");
     
-    public void setWeatherObject(WeatherObject weatherObject) {
-        
-    }
+    @FXML
+    private Label temperatureLabel = new Label("null");
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        cityLabel.setText(weatherObject.getCity());
+        //Configure a binding between the label and the model.weather.city
+        
+        //Configure a binding between the temperature and the model.weather.temperature
+        //
     }
    
     
@@ -59,6 +65,8 @@ public class FXMLShowWeatherController implements Initializable{
 
     public void setModel(WeatherModel model) {
         this.model = model;
+        cityLabel.textProperty().bind(model.getWeather().cityProperty());
+        temperatureLabel.textProperty().bind(Bindings.convert(model.getWeather().temperatureProperty()));
     }
     
 }

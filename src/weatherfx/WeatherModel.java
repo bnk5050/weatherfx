@@ -23,10 +23,39 @@
  */
 package weatherfx;
 
+import java.io.IOException;
+
 /**
  *
  * @author Brian
  */
 public class WeatherModel {
     
+    private WeatherObject weather;
+
+    public WeatherModel() {
+        weather = new WeatherObject();
+
+    }
+    
+    public void getWeatherByZip(String zipCode) throws IOException{
+        weather = WeatherExtractor.makeApiRequest(zipCode);
+    }
+    
+    public void getWeatherByCity(String cityAndState) throws IOException{
+        
+        weather = WeatherExtractor.makeApiRequest(cityAndState);
+    }
+
+    public WeatherObject getWeather() {
+        return weather;
+    }
+
+    public void setWeather(WeatherObject weather) {
+        this.weather = weather;
+    }
+    
+
+    
 }
+
