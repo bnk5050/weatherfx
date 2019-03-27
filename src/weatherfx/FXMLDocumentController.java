@@ -48,7 +48,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField cityStateField;
     
-    private WeatherModel model = new WeatherModel();
+    private WeatherModel model; 
     
     private void createShowWeatherScene(){
         
@@ -57,16 +57,18 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        
+        model = new WeatherModel(); //creates model
             
         try {
             cityStateField.setText("testing");
             //Use the Zipcode first
             if (!zipCodeField.getText().isEmpty()) {
-                //TODO validate input for zip code and city state
+                //TODO Validate ZIP code input
                 model.getWeatherByZip(zipCodeField.getText());
             }
             else if (!cityStateField.getText().isEmpty()) {
-                //TODO Validate the City and State
+                //TODO Validate the City and State input
                 model.getWeatherByCity(zipCodeField.getText());
             }
             else{
@@ -75,6 +77,8 @@ public class FXMLDocumentController implements Initializable {
             }
             
             }   catch (IOException e) {
+                
+                //TODO implement logging
             System.out.println("Error during API call");
             System.out.println("The cause is" + e.getCause());
             System.out.println("The message is" + e.getMessage());
@@ -86,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
              * Creates a new scene for the weatherViewParent root node
              */
             
- try {
+        try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLShowWeather.fxml"));
                 
                 Parent weatherViewParent = loader.load();
@@ -109,7 +113,7 @@ public class FXMLDocumentController implements Initializable {
                 currentStage.setScene(weatherViewScene);
                 currentStage.show();
                 
-            } catch (IOException e) {
+            } catch (IOException e) { 
                 System.out.println("Error Controller Load");
                 System.out.println("The cause is" + e.getCause());
                 System.out.println("The message is" + e.getMessage());
@@ -120,8 +124,6 @@ public class FXMLDocumentController implements Initializable {
         
         
     }
-    
-    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
