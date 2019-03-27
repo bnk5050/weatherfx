@@ -34,19 +34,20 @@ import java.io.IOException;
 public class WeatherModel {
     
     private WeatherObject weather;
+    private final WeatherExtractor weatherExtractor;
 
     public WeatherModel() {
-        weather = new WeatherObject();
-
+        
+        weatherExtractor = new WeatherExtractor();
     }
     
     public void getWeatherByZip(String zipCode) throws IOException{
-        weather = WeatherExtractor.makeApiRequest(zipCode);
+        weather = weatherExtractor.requestByZipCode(zipCode);
     }
     
     public void getWeatherByCity(String cityAndState) throws IOException{
         
-        weather = WeatherExtractor.makeApiRequest(cityAndState);
+        weather = weatherExtractor.requestByCity(cityAndState);
     }
 
     public WeatherObject getWeather() {
