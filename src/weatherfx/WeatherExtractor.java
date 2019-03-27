@@ -36,9 +36,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Brian
  */
+
+
 public class WeatherExtractor {
 
     private final String API_KEY = "0b398274ec45a0d76da946f036f74b38";
+    private StringBuilder apiCall;
     
     public WeatherExtractor() {
         

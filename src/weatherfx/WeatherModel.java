@@ -29,6 +29,8 @@ import java.io.IOException;
  *
  * @author Brian
  */
+
+
 public class WeatherModel {
     
     private WeatherObject weather;
